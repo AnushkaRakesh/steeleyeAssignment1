@@ -5,3 +5,7 @@
   background-color: rgb(4, 52, 99);
   color: white;
 }
+.noDataFound {
+  text-align: center;
+  margin-top: 1rem;
+}

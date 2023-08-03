@@ -20,10 +20,23 @@ const Dashboard = () => {
   const [selectedOrderDetails, setSelectedOrderDetails] = useState({});
   const [selectedOrderTimeStamps, setSelectedOrderTimeStamps] = useState({});
 
+  const handleSelectedOrder = (orderId) => {
+    let execDetails = mockData.results.filter((order) => order['&id'] === orderId);
+    if(execDetails && execDetails.length > 0) {
+      execDetails = execDetails[0].executionDetails;
+      setSelectedOrderDetails(execDetails);
+    }
+    let orderTimeStamp = timestamps.results.filter((stamp) => stamp['&id'] === orderId);
+    if(orderTimeStamp && orderTimeStamp.length > 0) {
+      orderTimeStamp = orderTimeStamp[0].timestamps;
+      setSelectedOrderTimeStamps(orderTimeStamp);
+    }
+  }
+
   return (
     <div>
       <div className={styles.header}>
-        <HeaderTitle primaryTitle="Orders" secondaryTitle="5 orders" />
+        <HeaderTitle primaryTitle="Orders" secondaryTitle={mockData.results.length} />
         <div className={styles.actionBox}>
           <Search
             value={searchText}
@@ -47,7 +60,7 @@ const Dashboard = () => {
             title="Selected Order Timestamps"
           />
         </div>
-        <List rows={mockData.results} />
+        <List rows={mockData.results} searchString={searchText} currency={currency} timeStamps={timestamps.results} setSelectedOrder={handleSelectedOrder}/>
       </div>
     </div>
   );

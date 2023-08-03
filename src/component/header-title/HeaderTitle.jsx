@@ -4,7 +4,7 @@ const HeaderTitle = ({ primaryTitle, secondaryTitle }) => {
   return (
     <div className={styles.container}>
       <h1>{primaryTitle}</h1>
-      <div>{secondaryTitle}</div>
+      <div>{secondaryTitle} orders</div>
     </div>
   );
 };
